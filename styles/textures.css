@@ -1,0 +1,36 @@
+.texture-bg {
+  background-image: url("/textures/main-bg.png");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+}
+
+.texture-bg-dark {
+  background-image: url("/textures/main-bg-dark.png");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+}
+
+.texture-slot {
+  background-image: url("/textures/slot-bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.texture-slot-dark {
+  background-image: url("/textures/slot-bg-dark.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.texture-portrait {
+  background-image: url("/textures/portrait-frame.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.texture-portrait-dark {
+  background-image: url("/textures/portrait-frame-dark.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
