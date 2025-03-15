@@ -1,5 +1,13 @@
 "use client";
 
+import {
+  rarityColors,
+  rarityText,
+  diabloRarityColors,
+  diabloRarityText,
+  mockEquipment,
+} from "~/data/equipment-data";
+
 import * as React from "react";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
@@ -14,107 +22,6 @@ import {
 } from "~/components/ui/tooltip";
 import Image from "next/image";
 
-// Updated mock equipment data for BiS Protection Paladin Tank
-const mockEquipment = {
-  head: {
-    name: "Felsteel Helm",
-    rarity: "epic",
-    description: "Forged from the essence of demons",
-    stats: "+54 Stamina, +50 Defense Rating, +33 Dodge Rating",
-    source: "Black Temple - Illidan Stormrage",
-  },
-  neck: {
-    name: "Pendant of the Perilous",
-    rarity: "epic",
-    description: "A symbol of unwavering defense",
-    stats: "+37 Stamina, +20 Defense Rating, +20 Dodge Rating",
-    source: "Mount Hyjal - Azgalor",
-  },
-  shoulders: {
-    name: "Pauldrons of the Forgotten Protector",
-    rarity: "epic",
-    description: "Shoulders that have weathered countless battles",
-    stats: "+46 Stamina, +36 Defense Rating, +26 Dodge Rating",
-    source: "Black Temple - Mother Shahraz",
-  },
-  chest: {
-    name: "Chestguard of the Forgotten Protector",
-    rarity: "epic",
-    description: "A chestpiece that stands against all odds",
-    stats: "+61 Stamina, +48 Defense Rating, +34 Dodge Rating",
-    source: "Black Temple - The Illidari Council",
-  },
-  hands: {
-    name: "Handguards of the Forgotten Protector",
-    rarity: "epic",
-    description: "Gauntlets that have turned aside countless blows",
-    stats: "+46 Stamina, +36 Defense Rating, +26 Dodge Rating",
-    source: "Mount Hyjal - Archimonde",
-  },
-  waist: {
-    name: "Belt of Divine Guidance",
-    rarity: "epic",
-    description: "A belt infused with holy power",
-    stats: "+49 Stamina, +34 Defense Rating, +26 Dodge Rating",
-    source: "Black Temple - Reliquary of Souls",
-  },
-  legs: {
-    name: "Legguards of the Forgotten Protector",
-    rarity: "epic",
-    description: "Leggings that have stood firm against evil",
-    stats: "+61 Stamina, +48 Defense Rating, +34 Dodge Rating",
-    source: "Black Temple - Illidan Stormrage",
-  },
-  feet: {
-    name: "Boots of the Righteous Path",
-    rarity: "epic",
-    description: "Boots that never falter in the face of danger",
-    stats: "+49 Stamina, +34 Defense Rating, +26 Dodge Rating",
-    source: "Mount Hyjal - Rage Winterchill",
-  },
-  mainHand: {
-    name: "Shard of the Fallen Star",
-    rarity: "epic",
-    description: "A mace forged from a fallen celestial body",
-    stats: "+271 Armor, +38 Stamina, +20 Defense Rating",
-    source: "Black Temple - Illidan Stormrage",
-  },
-  offHand: {
-    name: "Aegis of the Vindicator",
-    rarity: "epic",
-    description: "A shield blessed by the Naaru",
-    stats: "+3274 Armor, +45 Stamina, +19 Defense Rating",
-    source: "Black Temple - Illidan Stormrage",
-  },
-};
-
-const rarityColors = {
-  legendary: "border-amber-500 bg-amber-950/20 hover:bg-amber-950/30",
-  epic: "border-purple-500 bg-purple-950/20 hover:bg-purple-950/30",
-  rare: "border-blue-500 bg-blue-950/20 hover:bg-blue-950/30",
-  common: "border-gray-500 bg-gray-950/20 hover:bg-gray-950/30",
-};
-
-const rarityText = {
-  legendary: "text-amber-400",
-  epic: "text-purple-400",
-  rare: "text-blue-400",
-  common: "text-gray-400",
-};
-
-const diabloRarityColors = {
-  legendary: "border-orange-500 bg-orange-950/20 hover:bg-orange-950/30",
-  epic: "border-sky-500 bg-sky-950/20 hover:bg-sky-950/30",
-  rare: "border-yellow-500 bg-yellow-950/20 hover:bg-yellow-950/30",
-  common: "border-gray-500 bg-gray-950/20 hover:bg-gray-950/30",
-};
-
-const diabloRarityText = {
-  legendary: "text-orange-400",
-  epic: "text-sky-400",
-  rare: "text-yellow-400",
-  common: "text-gray-400",
-};
 
 export default function CharacterEquipment() {
   const [messages, setMessages] = React.useState<
@@ -159,7 +66,7 @@ export default function CharacterEquipment() {
     item,
   }: {
     slot: string;
-    item: typeof mockEquipment.head;
+    item: typeof mockEquipment.mainHand;
   }) => (
     <TooltipProvider>
       <Tooltip>
@@ -242,52 +149,42 @@ export default function CharacterEquipment() {
             )}
             <div className="relative mx-auto max-w-[800px]">
               {/* Equipment Grid */}
-              <div className="grid grid-cols-4 gap-2">
-                {/* Left Column */}
-                <div className="space-y-2">
-                  <EquipmentSlot slot="head" item={mockEquipment.head} />
-                  <EquipmentSlot slot="neck" item={mockEquipment.neck} />
-                  <EquipmentSlot
-                    slot="shoulders"
-                    item={mockEquipment.shoulders}
-                  />
-                  <EquipmentSlot slot="chest" item={mockEquipment.chest} />
-                </div>
-
+              <div className="grid grid-cols-3 gap-4">
                 {/* Character Portrait */}
-                <div className="col-span-2 flex items-center justify-center">
+                <div className="col-span-1 flex items-center justify-center">
                   <div
-                    className={`aspect-[3/4] w-full ${diabloMode ? "texture-portrait-dark bg-[#3a0a0a]" : "texture-portrait bg-[#2a3040]"} border-4 ${diabloMode ? "border-red-900" : "border-[#4a5060]"} overflow-hidden rounded-lg`}
+                    className={`aspect-[3/4] w-full max-w-[300px] ${
+                      diabloMode ? "texture-portrait-dark bg-[#3a0a0a]" : "texture-portrait bg-[#2a3040]"
+                    } border-4 ${
+                      diabloMode ? "border-red-900" : "border-[#4a5060]"
+                    } overflow-hidden rounded-lg`}
                   >
                     <Image
                       src="https://v3.fal.media/files/monkey/2JBNu5gpWRUzTnA86QrSr.png"
                       alt="Character Portrait - Blood Elf Female Paladin"
                       className="h-full w-full object-cover"
-                      width={300}
-                      height={400}
+                      width={400}
+                      height={533}
                     />
                   </div>
                 </div>
 
-                {/* Right Column */}
-                <div className="space-y-2">
-                  <EquipmentSlot slot="hands" item={mockEquipment.hands} />
-                  <EquipmentSlot slot="waist" item={mockEquipment.waist} />
-                  <EquipmentSlot slot="legs" item={mockEquipment.legs} />
-                  <EquipmentSlot slot="feet" item={mockEquipment.feet} />
-                </div>
-              </div>
+                {/* Equipment Slots */}
+                <div className="col-span-2 flex flex-col justify-center gap-4">
+                  {/* Armor Set */}
+                  <div className="w-full">
+                    <EquipmentSlot slot="armorSet" item={mockEquipment.armorSet} />
+                  </div>
 
-              {/* Weapons (Below the portrait) */}
-              <div className="mt-2 flex justify-center gap-2">
-                <div className="w-1/2">
-                  <EquipmentSlot
-                    slot="mainHand"
-                    item={mockEquipment.mainHand}
-                  />
-                </div>
-                <div className="w-1/2">
-                  <EquipmentSlot slot="offHand" item={mockEquipment.offHand} />
+                  {/* Weapons */}
+                  <div className="flex justify-between gap-4">
+                    <div className="w-1/2">
+                      <EquipmentSlot slot="mainHand" item={mockEquipment.mainHand} />
+                    </div>
+                    <div className="w-1/2">
+                      <EquipmentSlot slot="offHand" item={mockEquipment.offHand} />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
