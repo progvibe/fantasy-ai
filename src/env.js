@@ -15,6 +15,7 @@ export const env = createEnv({
     SINGLE_STORE_HOST: z.string(),
     SINGLE_STORE_PORT: z.string(),
     SINGLE_STORE_DATABASE: z.string(),
+    FAL_KEY: z.string(),
   },
 
   /**
@@ -37,6 +38,7 @@ export const env = createEnv({
     SINGLE_STORE_HOST: process.env.SINGLE_STORE_HOST,
     SINGLE_STORE_PORT: process.env.SINGLE_STORE_PORT,
     SINGLE_STORE_DATABASE: process.env.SINGLE_STORE_DATABASE,
+    FAL_KEY: process.env.FAL_KEY,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
   /**

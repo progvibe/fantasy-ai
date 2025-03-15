@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^6.10.3",
+    "@fal-ai/client": "^1.2.3",
     "@libsql/client": "^0.9.0",
     "@radix-ui/react-scroll-area": "^1.2.3",
     "@radix-ui/react-slot": "^1.1.1",
