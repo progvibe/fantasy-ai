@@ -16,7 +16,6 @@ import {
 import { Slider } from "~/components/ui/slider";
 import { Textarea } from "~/components/ui/textarea";
 import { ArrowLeft, ArrowRight, Wand2 } from "lucide-react";
-import { generateCharacterPortrait } from "~/utils/fal-utils";
 import type { FC } from "react";
 
 const questions = [
@@ -234,6 +233,7 @@ const CharacterCreator: FC<{
 
         const { portraitUrl } = await response.json();
         console.log("Portrait URL:", portraitUrl);
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         onComplete(formData, portraitUrl);
       } catch (error) {
         console.error("Error generating character portrait:", error);
@@ -264,7 +264,7 @@ const CharacterCreator: FC<{
 
       <div className="mb-8">
         <Component
-          value={formData[currentQuestion.id] || ""}
+          value={formData[currentQuestion.id] ?? ""}
           onChange={(value) => handleChange(currentQuestion.id, value)}
         />
       </div>
